@@ -39,19 +39,16 @@ def add_to_store():
     inventory.append(new_product)
 
 
-# add_to_store()
+add_to_store()
 
 def view_product(inventory):
-    print("="*15,"current store catalog","="*15)
-    print (f"id" "\t",      "product_name","\t",       "category","\t",       "price","\t","stock")
-    #print(f"{id":<6}  {,product_name':<25}  {'category':<15 } { 'price':<12}  {'stock':<8}")
-
-    print("-"* 50)
+    print("="*15,"CURRENT STORE CATALOG","="*15)
+    print('id','\t','product_name','\t','catagory','\t','price','\t','stock','\t','rating')
     for product in inventory:
-        print(f"{product['id']:<6}     {product['name']:<25}  {product['category']:<15}  {product['price']:<12}  {product['stock']:<8}")
+        print(f"{product['id']}\t,{product['name']}\t,{product['category']}\t,{product['price']}\t,{product['stock']}\t{product['rating']}")
 
 
-#view_product(inventory)
+view_product(inventory)
 
 def delete_product(inventory):
     id = int(input("enter product id"))
@@ -61,12 +58,8 @@ def delete_product(inventory):
 
     new_inventory = list(filter(delete_by_id, inventory))
     return new_inventory
-
-
-
-
-# inventory=delete_product(inventory)
-# view_product(inventory)
+inventory=delete_product(inventory)
+view_product(inventory)
 
 
 def search_by_category(inventory):
@@ -77,7 +70,7 @@ def search_by_category(inventory):
 
     result = list(filter(search_category, inventory))
     view_product(list(result))
-#search_results=search_by_category(inventory)
+search_results=search_by_category(inventory)
 
 
 
@@ -88,7 +81,7 @@ def search_by_name(inventory):
     result = list(filter(search_by_name, inventory))
 
     view_product(list(result))
-#search_results=search_by_name(inventory)
+search_results=search_by_name(inventory)
 
 
 def update_stock(inventory):
@@ -103,15 +96,24 @@ def update_stock(inventory):
     view_product(list(result))
 
 
-#update_stock(inventory)
-def view_in_stocks(inventory):
-    def in_stocks(product):
-        return product["stock"]>0
-
-    result=list(filter(in_stocks, inventory))
-    view_product(result)
 
 
+
+from functools import reduce
+def view_inventory_valuation_analytics():
+     
+     def calculate_total_value(total,product):
+         return total + (float(product["price"])* int(product["stock"]))
+     
+     total_value = reduce(calculate_total_value,inventory,0)
+
+     print(f"total inventory value : {total_value}")
+
+
+view_inventory_valuation_analytics()
+
+                       
+          
 
 
 
@@ -138,6 +140,10 @@ def main ():
                 update_stock(inventory)
         elif choice == 6:
                 view_in_stocks(inventory)
+        elif choice == 7:
+            view_inventory_valuation_analytics()
         else:
                 print("good bye")
 main()
+
+
