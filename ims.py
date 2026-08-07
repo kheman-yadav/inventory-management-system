@@ -126,6 +126,7 @@ def main ():
         print("Please Enter 4 for search by category")
         print("Please Enter 5 for update stock")
         print("please Enter 6 for view in stocks product")
+        
 
         choice = int(input("Enter your choice: "))
         if choice == 1:
@@ -139,11 +140,10 @@ def main ():
         elif choice == 5:
                 update_stock(inventory)
         elif choice == 6:
-                view_in_stocks(inventory)
-        elif choice == 7:
-            view_inventory_valuation_analytics()
+                view_inventory_valuation_analytics()
         else:
                 print("good bye")
 main()
+
 
 
